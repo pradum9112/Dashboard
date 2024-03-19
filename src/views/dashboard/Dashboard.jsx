@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import Header from '../../components/header';
+import Popup from '../../components/popup/Popup';
+import Alert from '../../components/alert/Alert';
+
 
 const Dashboard = () => {
-    const [state, setstate] = useState("");
+   const[openPopup,setOpenPopup]=useState(false);
 
     useEffect(() => {
         // Effect
@@ -44,11 +47,13 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+         
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 p-4 ">
           <button
             type="button"
             className="text-white bg-[#011638] hover:bg-[#011638]/90 font-medium rounded-lg text-sm p-3 me-[-2px] inline-flex items-center justify-center me-2 mb-2"
+             
           >
             Log Visit
           </button>
@@ -56,15 +61,21 @@ const Dashboard = () => {
           <button
             type="button"
             className="text-white bg-[#011638] hover:bg-[#011638]/90 font-medium rounded-lg text-sm p-3 me-[-2px] inline-flex items-center justify-center me-2 mb-2"
+            onClick={()=>setOpenPopup(true)}
           >
             Log Key
           </button>
+          
           <button
             type="button"
             className="text-white bg-[#011638] hover:bg-[#011638]/90 font-medium rounded-lg text-sm p-3 me-[-2px] inline-flex items-center justify-center me-2 mb-2"
           >
             Create Visitor
           </button>
+          <Popup onClick={()=>{setOpenPopup(false)}}  openPopup={openPopup}
+           setOpenPopup={setOpenPopup}>
+            <Alert/>            
+          </Popup>
         </div>
 
         <div className=" p-4 grid grid-cols-1  lg:grid-cols-3 gap-10 ">

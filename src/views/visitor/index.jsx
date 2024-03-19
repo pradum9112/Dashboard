@@ -11,20 +11,9 @@ const Visitors = () => {
     <div style={{height:"100vh",width:"100%",overflowY: 'auto',scrollbarWidth: 'thin'}}>
     <Box m="20px">
     <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header title="VISITOR" subtitle="Visitors list" />
         </Box>
     <Box>
-        <header className="bg-zinc-100  p-4 lg:px-8 lg:py-4 lg:sticky lg:top-0 lg:z-20 flex justify-between">
-          <div>
-            <h1 className=" text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
-              Visotors
-            </h1>
-            <p className="text-sm font-normal text-gray-500 lg:text-sm dark:text-gray-400">
-              Here's the hostelat a glance
-            </p>
-          </div>
-        </header>
-
         <div className=" p-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-10 ">
           <div className="flex items-center">
             <div class="flex items-center">
