@@ -1,321 +1,105 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
-import Header from '../../components/header';
-import Popup from '../../components/popup/Popup';
-import VisitorForm from '../visitorForm/visitorForm';
+import React from "react";
+import {
+  Box,
+  Button,
+  Typography,
+  TextField,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import Header from "../../components/header";
+import visitorData from "./visitorData";
+import { useTheme } from "../../ThemeProvider";
 
 const Visitors = () => {
-   const[openPopup,setOpenPopup]=useState(false);
-   
+  const theme = useTheme();
+  const { palette } = theme.theme;
   return (
-    <div style={{height:"100vh",width:"100%",overflowY: 'auto',scrollbarWidth: 'thin'}}>
-    <Box m="20px">
-    <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="VISITOR" subtitle="Visitors list" />
+    <Box
+      minHeight="100vh"
+      width="100%"
+      overflow="auto"
+      sx={{ scrollbarWidth: "thin" }}
+    >
+      <Box m={2}>
+        <Header
+          title="VISITORS"
+          breadcrumbs={[{ text: "Visitors", link: "/visitors" }]}
+        />
+        <Box p={2}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Box flex="0.4" display={"flex"} alignItems="center">
+              <TextField
+                fullWidth
+                variant="outlined"
+                placeholder="Search Items for your use..."
+                sx={{ height: "100%" }}
+              />
+              <Button
+                variant="contained"
+                sx={{
+                  marginLeft: "10px",
+                  backgroundColor: palette.primary.main,
+                  color: palette.text.main,
+                  "&:hover": { backgroundColor: palette.secondary.main },
+                  height: "100%",
+                }}
+              >
+                Search
+              </Button>
+            </Box>
+            <Box ml={2}>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: palette.primary.main,
+                  color: palette.text.main,
+                  "&:hover": { backgroundColor: palette.secondary.main },
+                  height: "100%",
+                }}
+              >
+                ADD VISITOR
+              </Button>
+            </Box>
+          </Box>
+
+          <TableContainer component={Paper} sx={{ mt: 2 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: 600 }}>Full name</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Phone Number</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Residence</TableCell>
+                  <TableCell sx={{ fontWeight: 600 }}>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {visitorData.map((visitor, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{visitor.fullName}</TableCell>
+                    <TableCell>{visitor.email}</TableCell>
+                    <TableCell>{visitor.phoneNumber}</TableCell>
+                    <TableCell>{visitor.residence}</TableCell>
+                    <TableCell>{visitor.action}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Box>
-    <Box>
-        <div className=" p-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-10 ">
-          <div className="flex items-center">
-            <div class="flex items-center">
-              <div class="w-[40rem] h-10 flex">
-                <input
-                  type="text"
-                  class="w-full border rounded p-2"
-                  placeholder="Search Items for your use..."
-                />
-                <div class=" items-center mt-4 lg:mt-0">
-                  <div class="ml-4  lg:ml-0">
-                    <button class="ms-2 bg-[#3e63dd] text-white rounded p-2 h-10 w-[7rem] hover:bg-blue-600">
-                      Search
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center  ">
-              <div className="flex items-center mt-4 lg:mt-0">
-                <div className="ml-4 lg:ml-0">
-                  <button className="ms-[26rem] bg-[#3e63dd] text-white rounded p-2 hover:bg-blue-600" onClick={()=>setOpenPopup(true)}>
-                    Create Visitor
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Popup onClick={()=>{setOpenPopup(false)}}  openPopup={openPopup}
-          setOpenPopup={setOpenPopup}>      
-           <VisitorForm/>
-          </Popup>
-          
-          <div className="  lg:col-span-2">
-            <div className="bg-white rounded-lg shadow  mb-8 ">
-              <table className="min-w-full border-collapse table-auto ">
-                <thead>
-                  <tr>
-                    <th className="px-3 py-2 bg-zinc-100 border-b text-left ">
-                      Full name
-                    </th>
-                    <th className="px-3 py-2 bg-zinc-100 border-b text-left  ">
-                      Email
-                    </th>
-                    <th className="px-3 py-2 bg-zinc-100 border-b text-left  ">
-                      Phone Number
-                    </th>
-                    <th className="px-3 py-2 bg-zinc-100 border-b text-left  ">
-                      Residence
-                    </th>
-                    <th className="px-3 py-2 bg-zinc-100 border-b text-left  ">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      John Doe
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      john@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      4001
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Jane Smith
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      jane@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      3021
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      John Doe
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      john@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      4001
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Jane Smith
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      jane@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      3021
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      John Doe
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      john@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      4001
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Jane Smith
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      jane@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      3021
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>{" "}
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      Bob Johnson
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      bob@ex.com
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b  text-left border-gray-300">
-                      2041
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      Logon Hal
-                    </td>
-                    <td className="px-3 py-2 whitespace-no-wrap border-b text-left border-gray-300">
-                      text
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
       </Box>
-      </Box>
-    </div>
+    </Box>
   );
 };
 
