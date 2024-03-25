@@ -148,7 +148,15 @@ const Dashboard = () => {
               <Typography variant="h5" mb={1} color={palette.text.primary}>
                 Today's Visitors
               </Typography>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  borderWidth: "1px",
+                  borderRadius: "5px",
+                  borderStyle: "solid",
+                  borderColor: "#01012E22",
+                }}
+              >
                 <Table aria-label="simple table">
                   <TableHead
                     sx={{ backgroundColor: palette.background.header }}
@@ -186,7 +194,15 @@ const Dashboard = () => {
               >
                 Today's Key Logs
               </Typography>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                sx={{
+                  borderWidth: "1px",
+                  borderRadius: "5px",
+                  borderStyle: "solid",
+                  borderColor: "#01012E22",
+                }}
+              >
                 <Table aria-label="simple table">
                   <TableHead
                     sx={{ backgroundColor: palette.background.header }}

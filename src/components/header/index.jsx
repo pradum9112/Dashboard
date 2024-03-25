@@ -14,7 +14,7 @@ const Header = ({ title, breadcrumbs }) => {
         <Typography
           variant="h5"
           fontWeight="bold"
-          color={palette.text.primary}
+          style={{ color: palette.primary.main }}
           sx={{ mb: "2px" }}
         >
           {title}

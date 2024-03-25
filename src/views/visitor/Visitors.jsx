@@ -22,16 +22,13 @@ const Visitors = () => {
   const { palette } = theme.theme;
   return (
     <Box
-     
       minHeight="100vh"
       width="100%"
       overflow="auto"
       sx={{ scrollbarWidth: "thin" }}
     >
-      <Box m={2}
-       >
+      <Box m={2}>
         <Header
-         
           title="VISITORS"
           breadcrumbs={[{ text: "Visitors", link: "/visitors" }]}
         />
@@ -41,13 +38,12 @@ const Visitors = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Box flex="0.4" display={"flex"} alignItems="center" >
+            <Box flex="0.4" display={"flex"} alignItems="center">
               <TextField
                 fullWidth
-                // variant="outlined"
                 placeholder="Search Items for your use..."
-                InputProps={{ sx: { height: '2.3rem !important' } }}
-                sx={{width:"38rem" }}
+                InputProps={{ sx: { height: "2.3rem !important" } }}
+                sx={{ width: "38rem" }}
               />
               <Button
                 variant="contained"
@@ -77,9 +73,18 @@ const Visitors = () => {
             </Box>
           </Box>
 
-          <TableContainer component={Paper} sx={{ mt: 2 }}>
+          <TableContainer
+            component={Paper}
+            sx={{
+              mt: 2,
+              borderWidth: "1px",
+              borderRadius: "5px",
+              borderStyle: "solid",
+              borderColor: "#01012E22",
+            }}
+          >
             <Table>
-              <TableHead>
+              <TableHead sx={{ backgroundColor: palette.background.header }}>
                 <TableRow>
                   <TableCell sx={{ fontWeight: 600 }}>Full name</TableCell>
                   <TableCell sx={{ fontWeight: 600 }}>Email</TableCell>

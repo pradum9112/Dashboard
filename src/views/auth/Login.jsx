@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from "react";
-import Topbar from "../../components/topbar";
-import Footer from "../../components/footer";
-
-// Alert component
-const Alert = ({ message }) => {
-  return (
-    <div
-      className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative"
-      role="alert"
-    >
-      <strong className="font-bold">Alert:</strong>
-      <span className="block sm:inline">{message}</span>
-    </div>
-  );
-};
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Container,
+  Paper,
+  Alert,
+} from "@mui/material";
+import { useTheme } from "../../ThemeProvider";
 
 const Login = () => {
+  const theme = useTheme();
+  const { palette } = theme.theme;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-
-  useEffect(() => {
-    // Code for any side effects on component mount
-  }, []);
 
   const handleSubmit = () => {
     const message = `Username: ${username}, Password: ${password}`;
@@ -32,61 +26,94 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: "block" }}>
-      {/* <Topbar /> */}
+    <Container maxWidth="sm">
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           height: "100vh",
-          width: "100%",
         }}
       >
-        <div className="w-[28rem] max-w-md p-3 bg-white rounded-lg shadow p-4">
-          <div className="mb-2">
-            {showAlert && <Alert message="Login Successful!" />}
-          </div>
-          <div className="mb-3 ms-2 text-3xl font-bold flex items-center justify-between">
+        <Paper
+          style={{
+            width: "28rem",
+            padding: "20px",
+            borderRadius: "6px",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: "#01012E22",
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          {showAlert && (
+            <Alert
+              severity="success"
+              onClose={() => setShowAlert(false)}
+              style={{ marginBottom: "16px" }}
+            >
+              Login Successful!
+            </Alert>
+          )}
+          <Typography
+            variant="h4"
+            align="center"
+            mb={2}
+            style={{ color: palette.primary.main }}
+            gutterBottom
+            fontWeight={600}
+          >
             Login
-          </div>
-          <form className="bg-white  rounded px-3 py-3">
-            <div className="mb-3">
-              <input
-                className="shadow-inner appearance-none border border-gray-300 hover:border-[#98adea] rounded w-[26rem] py-1 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                id="username"
-                type="text"
-                placeholder="Username"
-                style={{ width: "-webkit-fill-available" }}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                className="shadow-inner appearance-none border border-gray-300 rounded w-[26rem] hover:border-[#98adea] py-1 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                placeholder="Password"
-                style={{ width: "-webkit-fill-available" }}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="bg-[#011638] hover:bg-[#011638]/90 w-[26rem] text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-                type="button"
-                onClick={handleSubmit}
-              >
-                Login
-              </button>
-            </div>
+          </Typography>
+          <form>
+            <TextField
+              id="username"
+              fullWidth
+              placeholder="User Name"
+              InputProps={{
+                sx: {
+                  height: "2.1rem !important",
+                  boxShadow:
+                    "inset 0 1px 1px rgba(0,0,0,0.075), inset 0 0 8px rgba(0,0,0,0.1)",
+                },
+              }}
+              style={{ marginBottom: "16px" }}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              id="password"
+              type="password"
+              variant="outlined"
+              fullWidth
+              placeholder="Password"
+              InputProps={{
+                sx: {
+                  height: "2.1rem !important",
+                  boxShadow:
+                    "inset 0 1px 1px rgba(0,0,0,0.075), inset 0 0 8px rgba(0,0,0,0.1)",
+                },
+              }}
+              style={{ marginBottom: "16px" }}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={handleSubmit}
+              style={{
+                backgroundColor: palette.primary.main,
+                color: palette.text.main,
+                marginBottom: "16px",
+              }}
+            >
+              Login
+            </Button>
           </form>
-        </div>
+        </Paper>
       </div>
-      {/* <Footer /> */}
-    </div>
+    </Container>
   );
 };
 

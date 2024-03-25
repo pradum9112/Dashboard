@@ -7,7 +7,8 @@ import Dashboard from "./views/dashboard/Dashboard";
 
 import Login from "./views/auth/Login";
 import ResetPassword from "./views/auth/ResetPassword";
-import Visitors from "./views/visitor";
+import Visitors from "./views/visitor/Visitors";
+import Users from "./views/user/Users";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="/visitors" element={<Visitors />}></Route>
+            <Route path="/users" element={<Users />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/resetpassword" element={<ResetPassword />}></Route>
           </Routes>
