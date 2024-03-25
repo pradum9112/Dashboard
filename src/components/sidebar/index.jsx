@@ -47,7 +47,7 @@ const SideBar = () => {
   const role = "admin";
 
   return (
-    <Box sx={{ position: "relative", overflow: "visible" }}>
+    <Box sx={{ position: "relative", overflow: "visible"}}>
       <Box
         sx={{
           position: "absolute",
@@ -71,9 +71,9 @@ const SideBar = () => {
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           {isCollapsed ? (
-            <ArrowForwardIcon sx={{ fontSize: "15px" }} />
+            <ArrowForwardIcon sx={{ fontSize: "15px" }}/>
           ) : (
-            <ArrowBackIcon sx={{ fontSize: "15px" }} />
+            <ArrowBackIcon sx={{ fontSize: "15px" }}/>
           )}
         </IconButton>
       </Box>

@@ -9,13 +9,13 @@ const Header = ({ title, breadcrumbs }) => {
   const { palette } = theme.theme;
 
   return (
-    <Box mb="10px">
+    <Box mb="10px" ml="14px">
       {title && (
         <Typography
           variant="h5"
           fontWeight="bold"
           color={palette.text.primary}
-          sx={{ mb: "5px" }}
+          sx={{ mb: "2px" }}
         >
           {title}
         </Typography>

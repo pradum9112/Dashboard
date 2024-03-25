@@ -33,7 +33,7 @@ const Login = () => {
 
   return (
     <div style={{ display: "block" }}>
-      <Topbar />
+      {/* <Topbar /> */}
       <div
         style={{
           display: "flex",
@@ -85,7 +85,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

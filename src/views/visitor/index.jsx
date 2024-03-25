@@ -22,13 +22,16 @@ const Visitors = () => {
   const { palette } = theme.theme;
   return (
     <Box
+     
       minHeight="100vh"
       width="100%"
       overflow="auto"
       sx={{ scrollbarWidth: "thin" }}
     >
-      <Box m={2}>
+      <Box m={2}
+       >
         <Header
+         
           title="VISITORS"
           breadcrumbs={[{ text: "Visitors", link: "/visitors" }]}
         />
@@ -38,12 +41,13 @@ const Visitors = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Box flex="0.4" display={"flex"} alignItems="center">
+            <Box flex="0.4" display={"flex"} alignItems="center" >
               <TextField
                 fullWidth
-                variant="outlined"
+                // variant="outlined"
                 placeholder="Search Items for your use..."
-                sx={{ height: "100%" }}
+                InputProps={{ sx: { height: '2.3rem !important' } }}
+                sx={{width:"38rem" }}
               />
               <Button
                 variant="contained"
