@@ -29,14 +29,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Alert from "../../components/alert";
 
-import { useNavigate } from "react-router-dom";
-import UserProfile from "../userProfile/UserProfile";
-
 const Users = () => {
   const theme = useTheme();
   const { palette } = theme.theme;
-  const navigate = useNavigate();
-
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -60,14 +55,9 @@ const Users = () => {
   const handleView = (user) => {
     console.log("View action clicked");
     console.log(user);
-<<<<<<< Updated upstream
-    navigate(`/userprofile/${user.id}`, <UserProfile user={user} />)
-=======
     navigate(`/users/userprofile`, { state: { userData: user } });
->>>>>>> Stashed changes
     handleClose();
   };
-  
 
   const handleUpdate = (user) => {
     console.log("Update action clicked");
@@ -82,9 +72,6 @@ const Users = () => {
     handleClose();
   };
 
-<<<<<<< Updated upstream
-  console.log(selectedUser)
-=======
   const confirmDelete = () => {
     console.log("Deleting...");
     console.log(selectedUser);
@@ -92,7 +79,6 @@ const Users = () => {
     // Perform delete action
   };
 
->>>>>>> Stashed changes
   return (
     <Box
       minHeight="100vh"
