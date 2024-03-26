@@ -27,9 +27,14 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import { useNavigate } from "react-router-dom";
+import UserProfile from "../userProfile/UserProfile";
+
 const Users = () => {
   const theme = useTheme();
   const { palette } = theme.theme;
+
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -47,8 +52,10 @@ const Users = () => {
   const handleView = (user) => {
     console.log("View action clicked");
     console.log(user);
+    navigate(`/userprofile/${user.id}`, <UserProfile user={user} />)
     handleClose();
   };
+  
 
   const handleUpdate = (user) => {
     console.log("Update action clicked");
@@ -62,6 +69,7 @@ const Users = () => {
     handleClose();
   };
 
+  console.log(selectedUser)
   return (
     <Box
       minHeight="100vh"
