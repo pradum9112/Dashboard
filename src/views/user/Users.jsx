@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -20,12 +21,13 @@ import {
   ListItemText,
 } from "@mui/material";
 import Header from "../../components/header";
-import userData from "./userData"; // Assuming userData is the name of the file containing user data
+import userData from "../../utils/data/userData"; // Assuming userData is the name of the file containing user data
 import { useTheme } from "../../ThemeProvider";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Alert from "../../components/alert";
 
 import { useNavigate } from "react-router-dom";
 import UserProfile from "../userProfile/UserProfile";
@@ -33,11 +35,13 @@ import UserProfile from "../userProfile/UserProfile";
 const Users = () => {
   const theme = useTheme();
   const { palette } = theme.theme;
+  const navigate = useNavigate();
 
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   const handleClick = (event, user) => {
     setAnchorEl(event.currentTarget);
@@ -46,13 +50,21 @@ const Users = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
-    setSelectedUser(null);
+    // setSelectedUser(null);
+  };
+
+  const handleAddNewUser = () => {
+    navigate("/users/addnewuser");
   };
 
   const handleView = (user) => {
     console.log("View action clicked");
     console.log(user);
+<<<<<<< Updated upstream
     navigate(`/userprofile/${user.id}`, <UserProfile user={user} />)
+=======
+    navigate(`/users/userprofile`, { state: { userData: user } });
+>>>>>>> Stashed changes
     handleClose();
   };
   
@@ -60,16 +72,27 @@ const Users = () => {
   const handleUpdate = (user) => {
     console.log("Update action clicked");
     console.log(user);
+    navigate(`/users/updateuser`, { state: { user: user } });
     handleClose();
   };
 
   const handleDelete = (user) => {
-    console.log("Delete action clicked");
-    console.log(user);
+    setSelectedUser(user);
+    setShowDeleteAlert(true);
     handleClose();
   };
 
+<<<<<<< Updated upstream
   console.log(selectedUser)
+=======
+  const confirmDelete = () => {
+    console.log("Deleting...");
+    console.log(selectedUser);
+    setShowDeleteAlert(false);
+    // Perform delete action
+  };
+
+>>>>>>> Stashed changes
   return (
     <Box
       minHeight="100vh"
@@ -117,6 +140,7 @@ const Users = () => {
                   "&:hover": { backgroundColor: palette.secondary.main },
                   height: "100%",
                 }}
+                onClick={() => handleAddNewUser()}
               >
                 ADD USER
               </Button>
@@ -206,6 +230,15 @@ const Users = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <Alert
+            open={showDeleteAlert}
+            onClose={() => setShowDeleteAlert(false)}
+            title="Confirm Delete"
+            message="Are you sure you want to delete this user?"
+            buttonText="Delete"
+            buttonColor="red"
+            onButtonClick={confirmDelete}
+          />
         </Box>
       </Box>
     </Box>

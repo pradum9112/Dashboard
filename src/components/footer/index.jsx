@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Link } from "@mui/material";
+import { useTheme } from "../../ThemeProvider";
 
 const Footer = () => {
+  const theme = useTheme();
+  const { palette } = theme.theme;
+
   return (
     <Box
       sx={{
-        backgroundColor: "#17a2b8",
-        color: "#fff",
+        backgroundColor: palette.primary.main,
+        color: palette.text.main,
         padding: "20px 70px",
         textAlign: "center",
         width: "100%",

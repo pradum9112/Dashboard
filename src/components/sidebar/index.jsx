@@ -47,7 +47,7 @@ const SideBar = () => {
   const role = "admin";
 
   return (
-    <Box sx={{ position: "relative", overflow: "visible"}}>
+    <Box sx={{ position: "relative", overflow: "visible" }}>
       <Box
         sx={{
           position: "absolute",
@@ -71,9 +71,9 @@ const SideBar = () => {
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           {isCollapsed ? (
-            <ArrowForwardIcon sx={{ fontSize: "15px" }}/>
+            <ArrowForwardIcon sx={{ fontSize: "15px" }} />
           ) : (
-            <ArrowBackIcon sx={{ fontSize: "15px" }}/>
+            <ArrowBackIcon sx={{ fontSize: "15px" }} />
           )}
         </IconButton>
       </Box>
@@ -107,20 +107,20 @@ const SideBar = () => {
               access={role === "admin" || role === "receptionist"}
             />
             <Item
-              title="Passes"
-              to="/passes"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-              access={role === "admin" || role === "receptionist"}
-            />
-            <Item
               title="Users"
               to="/users"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
               access={role === "admin"}
+            />
+            <Item
+              title="Passes"
+              to="/passes"
+              icon={<ContactsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+              access={role === "admin" || role === "receptionist"}
             />
             <Item
               title="Reports"

@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
-  Typography,
   TextField,
-  Grid,
   Table,
   TableBody,
   TableCell,
@@ -12,14 +11,71 @@ import {
   TableHead,
   TableRow,
   Paper,
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import Header from "../../components/header";
-import visitorData from "./visitorData";
+import visitorData from "../../utils/data/visitorData";
 import { useTheme } from "../../ThemeProvider";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Alert from "../../components/alert";
 
 const Visitors = () => {
   const theme = useTheme();
   const { palette } = theme.theme;
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedVisitor, setSelectedVisitor] = useState(null);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+
+  const handleClick = (event, visitor) => {
+    setAnchorEl(event.currentTarget);
+    setSelectedVisitor(visitor);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    // setSelectedVisitor(null);
+  };
+
+  const handleAddNewVisitor = () => {
+    navigate("/visitors/addnewvisitor");
+  };
+
+  const handleView = (visitor) => {
+    console.log("Update action clicked");
+    console.log(visitor);
+    navigate(`/visitors/visitorprofile`, { state: { visitorData: visitor } });
+    handleClose();
+  };
+
+  const handleUpdate = (visitor) => {
+    console.log("Update action clicked");
+    console.log(visitor);
+    navigate(`/visitors/updatevisitor`, { state: { visitor: visitor } });
+    handleClose();
+  };
+
+  const handleDelete = (visitor) => {
+    setSelectedVisitor(visitor);
+    setShowDeleteAlert(true);
+    handleClose();
+  };
+
+  const confirmDelete = () => {
+    console.log("Deleting...");
+    console.log(selectedVisitor);
+    setShowDeleteAlert(false);
+    // Perform delete action
+  };
+
   return (
     <Box
       minHeight="100vh"
@@ -41,7 +97,7 @@ const Visitors = () => {
             <Box flex="0.4" display={"flex"} alignItems="center">
               <TextField
                 fullWidth
-                placeholder="Search Items for your use..."
+                placeholder="Search Visitors..."
                 InputProps={{ sx: { height: "2.3rem !important" } }}
                 sx={{ width: "38rem" }}
               />
@@ -67,6 +123,7 @@ const Visitors = () => {
                   "&:hover": { backgroundColor: palette.secondary.main },
                   height: "100%",
                 }}
+                onClick={() => handleAddNewVisitor()}
               >
                 ADD VISITOR
               </Button>
@@ -96,16 +153,62 @@ const Visitors = () => {
               <TableBody>
                 {visitorData.map((visitor, index) => (
                   <TableRow key={index}>
-                    <TableCell>{visitor.fullName}</TableCell>
+                    <TableCell>
+                      {visitor.firstName} {visitor.lastName}
+                    </TableCell>
                     <TableCell>{visitor.email}</TableCell>
                     <TableCell>{visitor.phoneNumber}</TableCell>
-                    <TableCell>{visitor.residence}</TableCell>
-                    <TableCell>{visitor.action}</TableCell>
+                    <TableCell>{visitor.address}</TableCell>
+                    <TableCell>
+                      <IconButton
+                        aria-label="more"
+                        aria-controls="actions-menu"
+                        aria-haspopup="true"
+                        onClick={(event) => handleClick(event, visitor)}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Menu
+                        id="actions-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem onClick={() => handleView(selectedVisitor)}>
+                          <ListItemIcon>
+                            <VisibilityIcon fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText primary="View" />
+                        </MenuItem>
+                        <MenuItem onClick={() => handleUpdate(selectedVisitor)}>
+                          <ListItemIcon>
+                            <EditIcon fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText primary="Update" />
+                        </MenuItem>
+                        <MenuItem onClick={() => handleDelete(selectedVisitor)}>
+                          <ListItemIcon>
+                            <DeleteIcon fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText primary="Delete" />
+                        </MenuItem>
+                      </Menu>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
+          <Alert
+            open={showDeleteAlert}
+            onClose={() => setShowDeleteAlert(false)}
+            title="Confirm Delete"
+            message="Are you sure you want to delete this visitor?"
+            buttonText="Delete"
+            buttonColor="red"
+            onButtonClick={confirmDelete}
+          />
         </Box>
       </Box>
     </Box>
