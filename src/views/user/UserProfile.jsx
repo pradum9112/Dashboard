@@ -12,7 +12,7 @@ const UserProfile = () => {
   const { userData } = location.state;
 
   return (
-    <Box m="20px" style={{ width: "100%" }}>
+    <Box m="2rem" p={2} style={{ width: "100%" }} sx={{ overflowY: "auto"}}>
       <Header
         title="USER DETAIL"
         breadcrumbs={[
@@ -36,21 +36,23 @@ const UserProfile = () => {
             "inset 0 1px 1px rgba(0,0,0,0.075), inset 0 0 8px rgba(0,0,0,0.1)",
         }}
       >
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Box
-              sx={{
-                textAlign: "center",
-                border: 1,
-                borderColor: "grey.500",
-                borderRadius: 1,
-                padding: 1,
-                width: "100%",
-                maxWidth: 250,
-                height: 250,
-                maxHeight: 250,
-              }}
-            >
+        <Grid container spacing={2} >
+          <Grid item xs={12} md={6} lg={6} sm={6}>
+           <Box  sx={{display: "flex",justifyContent: "center"}}>
+           <Box>
+        <Box
+          sx={{
+            textAlign: "center",
+            border: 1,
+            borderColor: "grey.500",
+            borderRadius: 1,
+            padding: 1,
+            width: "100%",
+            maxWidth: 250,
+            height: 250,
+            maxHeight: 250,
+          }}
+        >
               <img
                 alt={`${userData.firstName} ${userData.lastName}`}
                 src={defaultImage}
@@ -88,8 +90,11 @@ const UserProfile = () => {
                 }}
               />
             </Box>
+          </Box>
+
+           </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} lg={6} md={6} sm={6}>
             <Typography variant="h6" mt={2} textAlign="center">
               {`${userData.firstName} ${userData.lastName}`}
             </Typography>
