@@ -63,7 +63,7 @@ const UserProfile = () => {
                 alt={`${userData.firstName} ${userData.lastName}`}
                 src={userData.signature}
                 style={{
-                  width: 250,
+                  width: 240,
                   height: 80,
                   objectFit: 'cover',
                   borderRadius: '5px',
