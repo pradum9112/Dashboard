@@ -43,7 +43,7 @@ const UserProfile = () => {
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12} md={6}>
            <Card  sx={{ maxWidth: 595, boxShadow: 3 }} >
-             <Box m={1.4}  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+             <Box m={1.9}  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <img
                 alt={`${userData.firstName} ${userData.lastName}`}
                 src={userData.image || defaultImage}
@@ -64,7 +64,7 @@ const UserProfile = () => {
                 src={userData.signature}
                 style={{
                   width: 240,
-                  height: 80,
+                  height: 70,
                   objectFit: 'cover',
                   borderRadius: '5px',
                   border: `1px solid ${palette.grey[500]}`,
